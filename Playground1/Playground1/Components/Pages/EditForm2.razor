@@ -1,0 +1,42 @@
+@page "/editform2"
+
+<h1>Edit Form 2</h1>
+
+<Container>
+    <ContainedItem Label="First Name" bind-Value="@MyForm.FirstName" />
+    <ContainedItem Label="Last Name" bind-Value="@MyForm.LastName" />
+</Container>
+
+<EditForm Model="MyForm">
+    <div>
+        FN:<InputText bind-Value="@MyForm.FirstName" />
+    </div>
+    <div>
+        LN:<InputText bind-Value="@MyForm.LastName" />
+    </div>
+</EditForm>
+
+<div>
+    Model:
+    <div>FirstName: @MyForm.FirstName</div>
+    <div>LastName: @MyForm.LastName</div>
+    <div>Cats: @MyForm.NumCats</div>
+    <div>Age: @MyForm.Age</div>
+    <div>DoB: @MyForm.DoB</div>
+    <div>IsActive: @MyForm.IsActive</div>
+    <div>IsPlaying: @MyForm.IsPlaying</div>
+</div>
+
+
+<button class="btn btn-primary" onclick="@IncrementCount">Click me</button>
+
+@functions {
+    int currentCount = 0;
+
+    SimpleForm MyForm { get; set; } = new SimpleForm();
+
+    void IncrementCount()
+    {
+        currentCount++;
+    }
+}

@@ -1,0 +1,63 @@
+@page "/editform1"
+
+<h1>Edit Form</h1>
+
+<p>Current count: @currentCount</p>
+
+<EditForm Model="MyForm">
+    <ValidationSummary />
+
+    <div>
+        First Name: <InputText bind-Value="@MyForm.FirstName" />
+        <ValidationMessage For="@(() => MyForm.FirstName)" />
+    </div>
+    <div>
+        Last Name: <InputText bind-Value="@MyForm.LastName" />
+        <ValidationMessage For="@(() => MyForm.LastName)" />
+    </div>
+    <div>
+        Cat Count: <InputNumber bind-Value="@MyForm.NumCats" />
+        <ValidationMessage For="@(() => MyForm.NumCats)" />
+    </div>
+    <div>
+        Age: <InputNumber bind-Value="@MyForm.Age" />
+        <ValidationMessage For="@(() => MyForm.Age)" />
+    </div>
+    <div>
+        DoB: <InputDate bind-Value="@MyForm.DoB" />
+        <ValidationMessage For="@(() => MyForm.DoB)" />
+    </div>
+    <div>
+        Active: <InputCheckbox bind-Value="@MyForm.IsActive" />
+        <ValidationMessage For="@(() => MyForm.IsActive)" />
+    </div>
+    @*<div>
+            Playing: <InputCheckbox bind-Value="@MyForm.IsPlaying" />
+            <ValidationMessage For="@(() => MyForm.IsPlaying)" />
+        </div>*@
+</EditForm>
+
+<div>
+    Model:
+    <div>FirstName: @MyForm.FirstName</div>
+    <div>LastName: @MyForm.LastName</div>
+    <div>Cats: @MyForm.NumCats</div>
+    <div>Age: @MyForm.Age</div>
+    <div>DoB: @MyForm.DoB</div>
+    <div>IsActive: @MyForm.IsActive</div>
+    <div>IsPlaying: @MyForm.IsPlaying</div>
+</div>
+
+
+<button class="btn btn-primary" onclick="@IncrementCount">Click me</button>
+
+@functions {
+    int currentCount = 0;
+
+    SimpleForm MyForm { get; set; } = new SimpleForm();
+
+    void IncrementCount()
+    {
+        currentCount++;
+    }
+}

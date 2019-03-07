@@ -1,0 +1,14 @@
+﻿@implements IContainer
+<CascadingValue Value="this">
+    @Content
+</CascadingValue>
+@functions
+{
+    [Parameter]
+    RenderFragment Content { get; set; }
+    [Parameter]
+    RenderFragment<IContainedItem> Template { get; set; }
+
+    public RenderFragment<IContainedItem> GetTemplate() => Template;
+
+}

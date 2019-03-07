@@ -1,0 +1,37 @@
+﻿@implements IContainedItem
+@Parent.GetTemplate()(this)
+@functions
+{
+    [Parameter]
+    RenderFragment ChildContent { get; set; }
+
+    [CascadingParameter]
+    protected IContainer Parent { get; set; }
+
+    [Parameter]
+    protected string Label { get; set; }
+
+    [Parameter]
+    protected string Value { get; set; }
+
+    [Parameter]
+    protected EventCallback<string> ValueChanged { get; set; }
+
+    public string GetLabel
+    {
+        get => Label;
+        set => Label = value;
+    }
+
+    public string GetValue
+    {
+        get => Value;
+        set => Value = value;
+    }
+
+    public RenderFragment GetContent
+    {
+        get => ChildContent;
+        set => ChildContent = value;
+    }
+}

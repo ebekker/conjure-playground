@@ -1,0 +1,40 @@
+@page "/editform3"
+
+<h1>Edit Form 3</h1>
+
+<RowsLayout>
+    <InpText Label="FN" bind-Value="@FirstName" />
+    <InpText Label="LN" bind-Value="@LastName" />
+</RowsLayout>
+
+<hr/>
+
+<ColumnsLayout>
+    <InpText Label="FN" bind-Value="@FirstName" />
+    <InpText Label="LN" bind-Value="@LastName" />
+</ColumnsLayout>
+
+<hr/>
+
+@*
+<Container>
+    <Content>
+        <InpText Label="FN" bind-Value="@FirstName" />
+        <InpText Label="LN" bind-Value="@LastName" />
+    </Content>
+    <Template>
+        [@context.GetLabel]:[@context.GetContent]
+    </Template>
+</Container>
+*@
+
+<table border="1">
+    <tr><td>FN:</td><td><input type="text" bind="@FirstName" /></td></tr>
+    <tr><td>LN:</td><td><input type="text" bind="@LastName" /></td></tr>
+</table>
+
+@functions
+{
+    string FirstName { get; set; }
+    string LastName { get; set; }
+}

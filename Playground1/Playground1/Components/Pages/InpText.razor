@@ -1,0 +1,14 @@
+<ContainedItem Label="@Label">
+    <input type="text" value="@Value" onchange="@(async e => await ValueChanged.InvokeAsync((string)e.Value))" />
+</ContainedItem>
+@functions
+{
+    [Parameter]
+    string Label { get; set; }
+
+    [Parameter]
+    string Value { get; set; }
+
+    [Parameter]
+    EventCallback<string> ValueChanged { get; set; }
+}
