@@ -1,34 +1,54 @@
 ﻿@page "/"
+@inherits _Index
 
 <h1>Hello, world!</h1>
 
-Welcome to your new app.
-
 <Root>
     <ColumnsLayout>
-        <GroupBox Label="Box #1">
+        <GroupBox Label="Identity">
             <ColumnsLayout>
                 <RowsLayout>
-                    <TextBox />
-                    <CheckBox />
+                    <TextBox bind-Value="@MyModel.Username" />
+                    <TextBox bind-Value="@MyModel.Email" />
                 </RowsLayout>
                 <RowsLayout>
-                    <TextBox />
-                    <CheckBox />
+                    <TextBox bind-Value="@MyModel.FirstName" />
+                    <TextBox bind-Value="@MyModel.LastName" />
+                    @*<TextBox bind-Value="MyModel.DOB" />*@
                 </RowsLayout>
             </ColumnsLayout>
         </GroupBox>
-        <GroupBox Label="Box #2">
+        <GroupBox Label="Animals">
             <ColumnsLayout>
                 <RowsLayout>
                     <TextBox />
-                    <CheckBox />
+                    <TextBox />
                 </RowsLayout>
                 <RowsLayout>
-                    <TextBox />
-                    <CheckBox />
+                    <CheckBox bind-Value="@MyModel.HasFish" />
+                    <CheckBox bind-Value="@HasExoticFishComputed" />
                 </RowsLayout>
             </ColumnsLayout>
         </GroupBox>
     </ColumnsLayout>
 </Root>
+
+<div>
+    <div>Model:</div>
+    <pre>@ModelAsJson</pre>
+</div>
+
+@functions
+{
+    bool HasExoticFishComputed
+    {
+        get => !MyModel.HasFish ? false : (MyModel.HasExoticFish ?? false);
+        set
+        {
+            if (MyModel.HasFish)
+                MyModel.HasExoticFish = value;
+            else
+                MyModel.HasExoticFish = null;
+        }
+    }
+}

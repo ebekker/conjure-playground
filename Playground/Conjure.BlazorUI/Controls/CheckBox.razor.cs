@@ -5,12 +5,12 @@ using System.Text;
 
 namespace Conjure.BlazorUI.Controls
 {
-    public class _TextBox : ComponentBase
+    public class _CheckBox : ComponentBase
     {
         [Parameter]
-        protected string Value { get; set; }
+        protected bool Value { get; set; }
 
         [Parameter]
-        protected EventCallback<string> ValueChanged { get; set; }
+        protected EventCallback<bool> ValueChanged { get; set; }
     }
 }

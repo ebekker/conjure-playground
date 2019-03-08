@@ -1,3 +1,5 @@
-﻿<ControlContent>
-    CheckBox here!
+﻿@inherits _CheckBox
+<ControlContent>
+    <input type="checkbox" value="@Value"
+           onchange="@(async e => await ValueChanged.InvokeAsync((bool)e.Value))" />
 </ControlContent>
