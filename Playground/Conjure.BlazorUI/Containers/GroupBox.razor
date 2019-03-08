@@ -1,13 +1,20 @@
 ﻿@inherits _GroupBox
 <ControlContent>
-    <table class="cnjr-groupbox" style="border: solid 1px #00ff21; margin: 5px; padding: 5px;">
-        <tr class="cnjr-groupbox-label-row" style="border: solid 1px #ff6a00; margin: 5px; padding: 5px;">
-            <td class="cnjr-groupbox-label-cell" style="border: solid 1px #0094ff; margin: 5px; padding: 5px;">@Label</td>
+    <table class="cnjr-groupbox"
+           style="border: solid 1px #00ff21; margin: 5px; padding: 5px;">
+        <tr class="cnjr-groupbox-label-row"
+            style="border: solid 1px #ff6a00; margin: 5px; padding: 5px;">
+            <td class="cnjr-groupbox-label-cell"
+                style="border: solid 1px #0094ff; margin: 5px; padding: 5px;">@Label</td>
         </tr>
-        <ContainerContent Content="ChildContent">
+        <ContainerContent Content="ChildContent" LabelPosition="LabelPosition">
             <Template>
-                <tr class="cnjr-groupbox-content-row" style="border: solid 1px #b6ff00; margin: 5px; padding: 5px;">
-                    <td class="cnjr-groupbox-content-value" style="border: solid 1px #ffd800; margin: 5px; padding: 5px;">@context.Content</td>
+                <tr class="cnjr-groupbox-content-row"
+                    style="border: solid 1px #b6ff00; margin: 5px; padding: 5px;">
+                    <td class="cnjr-groupbox-content-value"
+                        style="border: solid 1px #ffd800; margin: 5px; padding: 5px;">
+                        @context.Content
+                    </td>
                 </tr>
             </Template>
         </ContainerContent>

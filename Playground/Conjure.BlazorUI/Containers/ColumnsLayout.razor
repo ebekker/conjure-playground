@@ -1,14 +1,209 @@
-﻿@inherits _ColumnsLayout
-<ControlContent>
-    <table class="cnjr-columnslayout" style="border: solid 1px #00ff21; margin: 5px; padding: 5px;">
-        <tr class="cnjr-columnslayout-content-row" style="border: solid 1px #b6ff00; margin: 5px; padding: 5px;">
-            <ContainerContent Content="ChildContent">
-                <Template>
-                    <td class="cnjr-rowslayout-content-value" style="border: solid 1px #ffd800; margin: 5px; padding: 5px;">
-                        @context.Content
-                    </td>
+﻿@using LP = Conjure.BlazorUI.Components.LabelPosition
+@inherits _ColumnsLayout
+<ControlContent Label="@Label">
+    <table class="cnjr-columnslayout"
+           style="border: solid 1px #00ff21; margin: 5px; padding: 5px;">
+
+        @* Top Row *@
+        <tr class="cnjr-columnslayout-content-row"
+            style="border: solid 1px #b6ff00; margin: 5px; padding: 5px;">
+            <ContainerContent Content="ChildContent" LabelPosition="LabelPosition">
+                <Template Context="control">
+                    @if ((control.LabelPosition ?? Components.LabelPosition.None) == LP.Top)
+                    {
+                        <td></td>
+                        <td class="cnjr-rowslayout-content-label"
+                            style="border: solid 1px #ff6a00; margin: 5px; padding: 5px;">
+                            @control.Label
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                        <td></td>
+                    }
                 </Template>
             </ContainerContent>
         </tr>
+
+        @* Control Row *@
+        <tr class="cnjr-columnslayout-content-row"
+            style="border: solid 1px #b6ff00; margin: 5px; padding: 5px;">
+            <ContainerContent Content="ChildContent" LabelPosition="LabelPosition">
+                <Template Context="control">
+                    @{
+                        var l = control.Label;
+                        var c = control.Content;
+                        var lp = control.LabelPosition ?? Components.LabelPosition.None;
+                    }
+                    @if (lp == LP.Top)
+                    {
+                        <td></td>
+                        <td class="cnjr-rowslayout-content-value"
+                            style="border: solid 1px #ffd800; margin: 5px; padding: 5px;">
+                            @c
+                        </td>
+
+                    }
+                    else if (lp == LP.LeftAligned)
+                    {
+                        <td class="cnjr-rowslayout-content-label"
+                            style="border: solid 1px #ff6a00; margin: 5px; padding: 5px; text-align: left;">
+                            @l
+                        </td>
+                        <td class="cnjr-rowslayout-content-value"
+                            style="border: solid 1px #ffd800; margin: 5px; padding: 5px;">
+                            @c
+                        </td>
+
+                    }
+                    else if (lp == LP.RightAligned)
+                    {
+                        <td class="cnjr-rowslayout-content-label"
+                            style="border: solid 1px #ff6a00; margin: 5px; padding: 5px; text-align: right;">
+                            @l
+                        </td>
+                        <td class="cnjr-rowslayout-content-value"
+                            style="border: solid 1px #ffd800; margin: 5px; padding: 5px;">
+                            @c
+                        </td>
+                    }
+                    else if (lp == LP.Bottom)
+                    {
+                        <td></td>
+                        <td class="cnjr-rowslayout-content-value"
+                            style="border: solid 1px #ffd800; margin: 5px; padding: 5px;">
+                            @c
+                        </td>
+                    }
+                    else if (lp == LP.None)
+                    {
+                        <td></td>
+                        <td class="cnjr-rowslayout-content-value"
+                            style="border: solid 1px #ffd800; margin: 5px; padding: 5px;">
+                            @c
+                        </td>
+                    }
+                    else if (lp == LP.Collapsed)
+                    {
+                        <td colspan="2"
+                            class="cnjr-rowslayout-content-value"
+                            style="border: solid 1px #ffd800; margin: 5px; padding: 5px;">
+                            @c
+                        </td>
+                    }
+                </Template>
+            </ContainerContent>
+        </tr>
+
+        @* Bottom Row *@
+        <tr class="cnjr-columnslayout-content-row"
+            style="border: solid 1px #b6ff00; margin: 5px; padding: 5px;">
+            <ContainerContent Content="ChildContent" LabelPosition="LabelPosition">
+                <Template Context="control">
+                    @if ((control.LabelPosition ?? Components.LabelPosition.None) == LP.Bottom)
+                    {
+                        <td></td>
+                        <td class="cnjr-rowslayout-content-label"
+                            style="border: solid 1px #ff6a00; margin: 5px; padding: 5px;">
+                            @control.Label
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                        <td></td>
+                    }
+                </Template>
+            </ContainerContent>
+        </tr>
+
     </table>
 </ControlContent>
+
+
+@*
+@inherits _ColumnsLayout
+<TemplateItem Control="@this">
+    <table class="columns-layout" border="0">
+        @*Top Row* @
+        <tr>
+            <TemplateGroup Targets="ChildContent">
+                <Template Context="target">
+                    @{
+                        var labeled = target.Control as ILabeled;
+                        var l = labeled?.Label; // $"Label[{labeled?.Label}]";
+                        var lp = labeled?.LabelPosition ?? this.LabelPosition ?? LabPos.LeftAligned;
+                    }
+                    @if (lp == LabPos.Top)
+                    {
+                        <td></td><td><span class="label">@l</span></td>
+
+                    }
+                    else
+                    {
+                        <td></td><td></td>
+                    }
+                </Template>
+            </TemplateGroup>
+        </tr>
+        @*Control Row* @
+        <tr>
+            <TemplateGroup Targets="ChildContent">
+                <Template Context="target">
+                    @{
+                        var labeled = target.Control as ILabeled;
+                        var l = labeled?.Label; // $"Label[{labeled?.Label}]";
+                        var lp = labeled?.LabelPosition ?? this.LabelPosition ?? LabPos.LeftAligned;
+                    }
+                    @if (lp == LabPos.Top)
+                    {
+                        <td></td><td>@target.Content</td>
+                    }
+                    else if (lp == LabPos.LeftAligned)
+                    {
+                        <td style="text-align: left;"><span class="label">@l</span></td><td>@target.Content</td>
+                    }
+                    else if (lp == LabPos.RightAligned)
+                    {
+                        <td style="text-align: right;"><span class="label">@l</span></td><td>@target.Content</td>
+                    }
+                    else if (lp == LabPos.Bottom)
+                    {
+                        <td></td><td>@target.Content</td>
+                    }
+                    else if (lp == LabPos.None)
+                    {
+                        <td></td><td>@target.Content</td>
+                    }
+                    else if (lp == LabPos.Collapsed)
+                    {
+                        <td colspan="2">@target.Content</td>
+                    }
+                </Template>
+            </TemplateGroup>
+        </tr>
+        @*Bottom Row* @
+        <tr>
+            <TemplateGroup Targets="ChildContent">
+                <Template Context="target">
+                    @{
+                        var labeled = target.Control as ILabeled;
+                        var l = labeled?.Label; // $"Label[{labeled?.Label}]";
+                        var lp = labeled?.LabelPosition ?? this.LabelPosition ?? LabPos.LeftAligned;
+                    }
+                    @if (lp == LabPos.Bottom)
+                    {
+                        <td></td><td><span class="label">@l</span></td>
+                    }
+                    else
+                    {
+                        <td></td><td></td>
+                    }
+                </Template>
+            </TemplateGroup>
+        </tr>
+    </table>
+</TemplateItem>
+    
+*@

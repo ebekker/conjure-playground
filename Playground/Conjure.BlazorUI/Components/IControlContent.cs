@@ -9,6 +9,8 @@ namespace Conjure.BlazorUI.Components
     {
         string Label { get; }
 
+        LabelPosition? LabelPosition { get; }
+
         RenderFragment Content { get; }
     }
 }

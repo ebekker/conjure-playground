@@ -1,12 +1,143 @@
-﻿@inherits _RowsLayout
-<ControlContent>
-    <table class="cnjr-rowslayout" style="border: solid 1px #00ff21; margin: 5px; padding: 5px;">
-        <ContainerContent Content="ChildContent">
-            <Template>
-                <tr class="cnjr-rowslayout-content-row" style="border: solid 1px #b6ff00; margin: 5px; padding: 5px;">
-                    <td class="cnjr-rowslayout-content-value" style="border: solid 1px #ffd800; margin: 5px; padding: 5px;">@context.Content</td>
-                </tr>
+﻿@using LP = Conjure.BlazorUI.Components.LabelPosition
+@inherits _RowsLayout
+<ControlContent Label="@Label">
+    <table class="cnjr-rowslayout"
+           style="border: solid 1px #00ff21; margin: 5px; padding: 5px;">
+        <ContainerContent Content="ChildContent" LabelPosition="LabelPosition">
+            <Template Context="control">
+                @{
+                    var l = control.Label;
+                    var c = control.Content;
+                    var lp = control.LabelPosition ?? Components.LabelPosition.None;
+                }
+                @if (lp == LP.Top)
+                {
+                    <tr class="cnjr-rowslayout-content-row"
+                        style="border: solid 1px #b6ff00; margin: 5px; padding: 5px;">
+                        <td></td>
+                        <td class="cnjr-rowslayout-content-label"
+                            style="border: solid 1px #ff6a00; margin: 5px; padding: 5px;">@l</td>
+                    </tr>
+                    <tr class="cnjr-rowslayout-content-row"
+                        style="border: solid 1px #b6ff00; margin: 5px; padding: 5px;">
+                        <td></td>
+                        <td class="cnjr-rowslayout-content-value"
+                            style="border: solid 1px #ffd800; margin: 5px; padding: 5px;">@c</td>
+                    </tr>
+                }
+                else if (lp == LP.LeftAligned)
+                {
+                    <tr class="cnjr-rowslayout-content-row"
+                        style="border: solid 1px #b6ff00; margin: 5px; padding: 5px;">
+                        <td class="cnjr-rowslayout-content-label"
+                            style="border: solid 1px #ff6a00; margin: 5px; padding: 5px; text-align: left;">@l</td>
+                        <td class="cnjr-rowslayout-content-value"
+                            style="border: solid 1px #ffd800; margin: 5px; padding: 5px;">@c</td>
+                    </tr>
+
+                }
+                else if (lp == LP.RightAligned)
+                {
+                    <tr class="cnjr-rowslayout-content-row"
+                        style="border: solid 1px #b6ff00; margin: 5px; padding: 5px;">
+                        <td class="cnjr-rowslayout-content-label"
+                            style="border: solid 1px #ff6a00; margin: 5px; padding: 5px; text-align: right;">@l</td>
+                        <td class="cnjr-rowslayout-content-value"
+                            style="border: solid 1px #ffd800; margin: 5px; padding: 5px;">@c</td>
+                    </tr>
+                }
+                else if (lp == LP.Bottom)
+                {
+                    <tr class="cnjr-rowslayout-content-row"
+                        style="border: solid 1px #b6ff00; margin: 5px; padding: 5px;">
+                        <td></td>
+                        <td class="cnjr-rowslayout-content-value"
+                            style="border: solid 1px #ffd800; margin: 5px; padding: 5px;">@c</td>
+                    </tr>
+                    <tr class="cnjr-rowslayout-content-row"
+                        style="border: solid 1px #b6ff00; margin: 5px; padding: 5px;">
+                        <td></td>
+                        <td class="cnjr-rowslayout-content-label"
+                            style="border: solid 1px #ff6a00; margin: 5px; padding: 5px;">@l</td>
+                    </tr>
+                }
+                else if (lp == LP.None)
+                {
+                    <tr class="cnjr-rowslayout-content-row"
+                        style="border: solid 1px #b6ff00; margin: 5px; padding: 5px;">
+                        <td class="cnjr-rowslayout-content-label"
+                            style="border: solid 1px #ff6a00; margin: 5px; padding: 5px;">
+                        </td>
+                        <td class="cnjr-rowslayout-content-value"
+                            style="border: solid 1px #ffd800; margin: 5px; padding: 5px;">
+                            @c
+                        </td>
+                    </tr>
+                }
+                else if (lp == LP.Collapsed)
+                {
+                    <tr class="cnjr-rowslayout-content-row"
+                        style="border: solid 1px #b6ff00; margin: 5px; padding: 5px;">
+                        <td colspan="2"
+                            class="cnjr-rowslayout-content-value"
+                            style="border: solid 1px #ffd800; margin: 5px; padding: 5px;">
+                            @c
+                        </td>
+                    </tr>
+                }
+
             </Template>
         </ContainerContent>
     </table>
 </ControlContent>
+
+
+
+@*<TemplateItem Control="@this">
+        <table class="rows-layout" border="0">
+            <TemplateGroup Targets="ChildContent">
+                <Template Context="target">
+                    @{
+                        var labeled = target.Control as ILabeled;
+                        var l = labeled?.Label; // $"Label[{labeled?.Label}]";
+                        var lp = labeled?.LabelPosition ?? this.LabelPosition ?? LabPos.LeftAligned;
+                    }
+                    @if (lp == LabPos.Top)
+                    {
+                        <tr><td></td><td><span class="label">@l</span></td></tr>
+                        <tr><td></td><td>@target.Content</td></tr>
+                    }
+                    else if (lp == LabPos.LeftAligned)
+                    {
+                        <tr>
+                            <td style="text-align: left;"><span class="label">@l</span></td>
+                            <td>@target.Content</td>
+                        </tr>
+                    }
+                    else if (lp == LabPos.RightAligned)
+                    {
+                        <tr>
+                            <td style="text-align: right;"><span class="label">@l</span></td>
+                            <td>@target.Content</td>
+                        </tr>
+                    }
+                    else if (lp == LabPos.Bottom)
+                    {
+                        <tr><td></td><td>@target.Content</td></tr>
+                        <tr><td></td><td><span class="label">@l</span></td></tr>
+                    }
+                    else if (lp == LabPos.None)
+                    {
+                        <tr>
+                            <td></td>
+                            <td>@target.Content</td>
+                        </tr>
+                    }
+                    else if (lp == LabPos.Collapsed)
+                    {
+                        <tr><td colspan="2">@target.Content</td></tr>
+                    }
+                </Template>
+            </TemplateGroup>
+        </table>
+    </TemplateItem>*@

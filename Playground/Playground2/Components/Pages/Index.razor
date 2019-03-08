@@ -6,31 +6,54 @@
 <Root>
     <ColumnsLayout>
         <GroupBox Label="Identity">
-            <ColumnsLayout>
-                <RowsLayout>
-                    <TextBox bind-Value="@MyModel.Username" />
-                    <TextBox bind-Value="@MyModel.Email" />
+            <ColumnsLayout LabelPosition="LabelPosition.Top">
+                <RowsLayout Label="Unique">
+                    <TextBox Label="UN" bind-Value="@MyModel.Username" />
+                    <TextBox Label="EM" bind-Value="@MyModel.Email" />
                 </RowsLayout>
-                <RowsLayout>
-                    <TextBox bind-Value="@MyModel.FirstName" />
-                    <TextBox bind-Value="@MyModel.LastName" />
-                    @*<TextBox bind-Value="MyModel.DOB" />*@
+                <RowsLayout Label="Common" LabelPosition="LabelPosition.LeftAligned">
+                    <TextBox Label="FN" bind-Value="@MyModel.FirstName" />
+                    <TextBox Label="LN" bind-Value="@MyModel.LastName" />
+                    @*<TextBox Label="DB" bind-Value="MyModel.DOB" />*@
+                </RowsLayout>
+                <RowsLayout LabelPosition="LabelPosition.None">
+                    <TextBox Label="FN" bind-Value="@MyModel.FirstName" />
+                    <TextBox Label="LN" bind-Value="@MyModel.LastName" />
+                    @*<TextBox Label="DB" bind-Value="MyModel.DOB" />*@
                 </RowsLayout>
             </ColumnsLayout>
         </GroupBox>
         <GroupBox Label="Animals">
             <ColumnsLayout>
-                <RowsLayout>
-                    <TextBox />
-                    <TextBox />
+                <RowsLayout LabelPosition="LabelPosition.Bottom">
+                    <TextBlock>These are NOT 2-Way Bound</TextBlock>
+                    <TextBox Label="Dog Count" Value="@MyModel.DogCount.ToString()" />
+                    <TextBox Label="Count of Cats" Value="@MyModel.CatCount.ToString()" />
                 </RowsLayout>
                 <RowsLayout>
-                    <CheckBox bind-Value="@MyModel.HasFish" />
-                    <CheckBox bind-Value="@HasExoticFishComputed" />
+                    <CheckBox Label="HF" bind-Value="@MyModel.HasFish" />
+                    <CheckBox Label="HEF" bind-Value="@HasExoticFishComputed" />
+                    <ListBox Label="HEF " bind-Value="@HasExoticFishString">
+                        <option value="true">Yah</option>
+                        <option value="false">Nah</option>
+                        <option value="null">N/A</option>
+                    </ListBox>
                 </RowsLayout>
             </ColumnsLayout>
         </GroupBox>
     </ColumnsLayout>
+    <RowsLayout>
+        <TextBlock Label="Username"   LabelPosition="LabelPosition.Top"         >@MyModel.Username</TextBlock>
+        <TextBlock Label="Email"      LabelPosition="LabelPosition.RightAligned">@MyModel.Email</TextBlock>
+        <TextBlock Label="First Name" LabelPosition="LabelPosition.LeftAligned" >@MyModel.FirstName</TextBlock>
+        <TextBlock Label="Last Name"  LabelPosition="LabelPosition.Bottom"      >@MyModel.LastName</TextBlock>
+    </RowsLayout>
+    <RowsLayout>
+        <TextBlock Label="Username"   LabelPosition="LabelPosition.None"        >@MyModel.Username</TextBlock>
+        <TextBlock Label="Email"      LabelPosition="LabelPosition.RightAligned">@MyModel.Email</TextBlock>
+        <TextBlock Label="First Name" LabelPosition="LabelPosition.LeftAligned" >@MyModel.FirstName</TextBlock>
+        <TextBlock Label="Last Name"  LabelPosition="LabelPosition.Collapsed"   >@MyModel.LastName</TextBlock>
+    </RowsLayout>
 </Root>
 
 <div>
@@ -50,5 +73,11 @@
             else
                 MyModel.HasExoticFish = null;
         }
+    }
+
+    string HasExoticFishString
+    {
+        get => MyModel.HasExoticFish?.ToString() ?? "null";
+        set => MyModel.HasExoticFish = value == "null" ? null : (bool?)bool.Parse(value);
     }
 }

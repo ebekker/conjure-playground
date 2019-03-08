@@ -1,5 +1,5 @@
 ﻿@inherits _TextBox
-<ControlContent>
+<ControlContent Label="@Label" LabelPosition="@LabelPosition">
     <input type="text" value="@Value"
            onchange="@(async e => await ValueChanged.InvokeAsync((string)e.Value))" />
 </ControlContent>

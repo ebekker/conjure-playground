@@ -7,6 +7,8 @@ namespace Conjure.BlazorUI.Components
 {
     public interface IContainerContent
     {
+        LabelPosition? LabelPosition { get; }
+
         RenderFragment<IControlContent> Template{ get; }
     }
 }

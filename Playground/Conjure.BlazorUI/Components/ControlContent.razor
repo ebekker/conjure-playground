@@ -1,2 +1,4 @@
 ﻿@inherits  _ControlContent
-@Parent.Template(this)
+<CascadingValue Value="(IControlContent)this">
+    @ParentContainer?.Template(this)
+</CascadingValue>
