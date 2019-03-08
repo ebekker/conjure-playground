@@ -1,0 +1,6 @@
+﻿@typeparam T
+@inherits _ListBox<T>
+<ControlContent Label="@Label" LabelPosition="@LabelPosition">
+    <select value="@Value"
+            onchange="@(async e => await ValueChanged.InvokeAsync((T)e.Value))">@ChildContent</select>
+</ControlContent>
