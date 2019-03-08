@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -7,10 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="IGNORE\**" />
-    <Content Remove="IGNORE\**" />
-    <EmbeddedResource Remove="IGNORE\**" />
-    <None Remove="IGNORE\**" />
+    <Compile Remove="_IGNORE\**" />
+    <Content Remove="_IGNORE\**" />
+    <EmbeddedResource Remove="_IGNORE\**" />
+    <None Remove="_IGNORE\**" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,11 +1,14 @@
 <ContainedItem Label="@Label">
     <DataAnnotationsValidator />
     @*<input type="text" value="@Value" onchange="@(async e => await ValueChanged.InvokeAsync((string)e.Value))" />*@
-    <InputText Value="@Value" ValueExpression="@(() => Value)" ValueChanged="@(async v => await ValueChanged.InvokeAsync(v))" />
+    <InputText Value="@Value" ValueExpression="@(() => Value)" ValueChanged="@(async v => { await ValueChanged.InvokeAsync(v); CascadedEditContext.Validate(); })" />
     <ValidationMessage For="@(() => Value)" />
 </ContainedItem>
 @functions
 {
+    [CascadingParameter]
+    EditContext CascadedEditContext { get; set; }
+
     [Parameter]
     string Label { get; set; }
 

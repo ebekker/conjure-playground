@@ -1,0 +1,29 @@
+@Label:
+<InputText Value="@Value"
+           ValueExpression="@(() => Value)"
+           ValueChanged="@(async v => { await ValueChanged.InvokeAsync(v); /*ThisEditContenxt.NotifyValidationStateChanged();*/ CascadedEditContext.Validate(); })" />
+<ValidationMessage For="@(() => Value)" />
+@functions
+{
+
+
+    [CascadingParameter]
+    EditContext CascadedEditContext { get; set; }
+
+    [Parameter]
+    string Label { get; set; }
+
+    [Parameter]
+    string Value { get; set; }
+
+    [Parameter]
+    EventCallback<string> ValueChanged { get; set; }
+
+    public override async Task SetParametersAsync(ParameterCollection parameters)
+    {
+        await base.SetParametersAsync(parameters);
+        CascadedEditContext.OnFieldChanged += (s, e) =>
+            //Console.WriteLine("Field changed: " + e.FieldIdentifier.FieldName);
+            CascadedEditContext.NotifyFieldChanged(e.FieldIdentifier);
+    }
+}

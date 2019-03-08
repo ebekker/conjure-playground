@@ -1,0 +1,41 @@
+@page "/editform4"
+
+<h1>Edit Form 4</h1>
+
+<EditForm Model="@myModel">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <table border="1">
+        <tr><td>FN:</td><td><InputText bind-Value="@myModel.FirstName" /></td></tr>
+        <tr><td>LN:</td><td><InputText bind-Value="@myModel.LastName" /></td></tr>
+    </table>
+</EditForm>
+
+<hr />
+
+<EditForm Model="@myModel">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <MyChildContent>
+        <table border="1">
+            <tr><td>FN:</td><td><InputText bind-Value="@myModel.FirstName" /></td></tr>
+            <tr><td>LN:</td><td><InputText bind-Value="@myModel.LastName" /></td></tr>
+        </table>
+    </MyChildContent>
+</EditForm>
+
+<hr />
+
+<EditForm Model="@myModel">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <table border="1">
+        <tr><td><MyInputText Label="First Name" bind-Value="@myModel.FirstName" /></td></tr>
+        <tr><td><MyInputText Label="Last Name" bind-Value="@myModel.LastName" /></td></tr>
+    </table>
+</EditForm>
+
+@functions
+{
+    public LocalModel1 myModel = new LocalModel1();
+}
