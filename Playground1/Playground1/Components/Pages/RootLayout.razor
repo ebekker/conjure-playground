@@ -1,0 +1,21 @@
+<EditForm Model="@Model" Context="editForm">
+    <DataAnnotationsValidator />
+    <div style="border: solid 1px #">
+        <ValidationSummary />
+    </div>
+    <div style="border: solid 1px #00ffff">
+        <Container Content="ChildContent">
+            <Template>
+                @context.GetContent
+            </Template>
+        </Container>
+    </div>
+</EditForm>
+@functions
+{
+    [Parameter]
+    object Model { get; set; }
+
+    [Parameter]
+    RenderFragment ChildContent { get; set; }
+}

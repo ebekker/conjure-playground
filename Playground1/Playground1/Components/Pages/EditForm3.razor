@@ -1,40 +1,77 @@
 @page "/editform3"
+@using System.ComponentModel.DataAnnotations
 
 <h1>Edit Form 3</h1>
 
-<RowsLayout>
-    <InpText Label="FN" bind-Value="@FirstName" />
-    <InpText Label="LN" bind-Value="@LastName" />
-</RowsLayout>
-
-<hr/>
-
-<ColumnsLayout>
-    <InpText Label="FN" bind-Value="@FirstName" />
-    <InpText Label="LN" bind-Value="@LastName" />
-</ColumnsLayout>
-
-<hr/>
-
 @*
-<Container>
-    <Content>
-        <InpText Label="FN" bind-Value="@FirstName" />
-        <InpText Label="LN" bind-Value="@LastName" />
-    </Content>
-    <Template>
-        [@context.GetLabel]:[@context.GetContent]
-    </Template>
-</Container>
+    <Container>
+        <Content>
+            <InpText Label="FN" bind-Value="@myModel.FirstName" />
+            <InpText Label="LN" bind-Value="@myModel.LastName" />
+        </Content>
+        <Template>
+            [@context.GetLabel]:[@context.GetContent]
+        </Template>
+    </Container>
 *@
 
+<RootLayout Model="@myModel">
+    <RowsLayout>
+        <InpText Label="FN" bind-Value="@myModel.FirstName" />
+        <InpText Label="LN" bind-Value="@myModel.LastName" />
+        <InpNumber Label="AG" bind-Value="@myModel.Age" />
+    </RowsLayout>
+</RootLayout>
+
+<hr />
+
+<RootLayout Model="@myModel">
+    <ColumnsLayout>
+        <InpText Label="FN" bind-Value="@myModel.FirstName" />
+        <InpText Label="LN" bind-Value="@myModel.LastName" />
+        <InpNumber Label="AG" bind-Value="@myModel.Age" />
+    </ColumnsLayout>
+</RootLayout>
+
+<hr />
+
+<RootLayout Model="@myModel">
+    <ValidationSummary />
+    <DataAnnotationsValidator />
+    FN:</td><td><InputText bind-Value="@myModel.FirstName" />
+    <ColumnsLayout>
+        <RowsLayout>
+            <InpText Label="FN" bind-Value="@myModel.FirstName" />
+            <InpText Label="LN" bind-Value="@myModel.LastName" />
+            <InpNumber Label="AG" bind-Value="@myModel.Age" />
+        </RowsLayout>
+        <RowsLayout>
+            <InpText Label="FN" bind-Value="@myModel.FirstName" />
+            <InpText Label="LN" bind-Value="@myModel.LastName" />
+            <InpNumber Label="AG" bind-Value="@myModel.Age" />
+        </RowsLayout>
+    </ColumnsLayout>
+</RootLayout>
+
+<hr />
+
 <table border="1">
-    <tr><td>FN:</td><td><input type="text" bind="@FirstName" /></td></tr>
-    <tr><td>LN:</td><td><input type="text" bind="@LastName" /></td></tr>
+    <tr><td>FN:</td><td><input type="text" bind="@myModel.FirstName" /></td></tr>
+    <tr><td>LN:</td><td><input type="text" bind="@myModel.LastName" /></td></tr>
 </table>
+
+<hr />
+
+<EditForm Model="@myModel">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <table border="1">
+        <tr><td>FN:</td><td><InputText bind-Value="@myModel.FirstName" /></td></tr>
+        <tr><td>LN:</td><td><InputText bind-Value="@myModel.LastName" /></td></tr>
+    </table>
+</EditForm>
 
 @functions
 {
-    string FirstName { get; set; }
-    string LastName { get; set; }
+    public LocalModel1 myModel = new LocalModel1();
 }

@@ -1,7 +1,6 @@
 <ContainedItem Label="@Label">
-    <DataAnnotationsValidator />
     @*<input type="text" value="@Value" onchange="@(async e => await ValueChanged.InvokeAsync((string)e.Value))" />*@
-    <InputText Value="@Value" ValueExpression="@(() => Value)" ValueChanged="@(async v => await ValueChanged.InvokeAsync(v))" />
+    <InputNumber Value="@Value" ValueExpression="@(() => Value)" T="int" ValueChanged="@(async v => await ValueChanged.InvokeAsync(v))" />
     <ValidationMessage For="@(() => Value)" />
 </ContainedItem>
 @functions
@@ -10,8 +9,8 @@
     string Label { get; set; }
 
     [Parameter]
-    string Value { get; set; }
+    int Value { get; set; }
 
     [Parameter]
-    EventCallback<string> ValueChanged { get; set; }
+    EventCallback<int> ValueChanged { get; set; }
 }

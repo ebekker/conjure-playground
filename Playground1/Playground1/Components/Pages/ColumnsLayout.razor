@@ -1,14 +1,20 @@
-<table border="1">
-    <tr>
-        <Container Content="ChildContent">
-            <Template>
-                <td style="background-color: #ddf;">@context.GetLabel:</td><td style="background-color: #dfd;">@context.GetContent</td>
-            </Template>
-        </Container>
-    </tr>
-</table>
+<ContainedItem Label="@Label">
+    <table border="1" style="border: solid 1px #b200ff">
+        <tr>
+            <Container Content="ChildContent">
+                <Template>
+                    <td style="background-color: #ddf;">@context.GetLabel:</td>
+                    <td style="background-color: #dfd;">@context.GetContent</td>
+                </Template>
+            </Container>
+        </tr>
+    </table>
+</ContainedItem>
 @functions
 {
+    [Parameter]
+    string Label { get; set; }
+
     [Parameter]
     RenderFragment ChildContent { get; set; }
 }
