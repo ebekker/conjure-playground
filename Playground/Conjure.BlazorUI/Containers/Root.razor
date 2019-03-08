@@ -1,0 +1,24 @@
+﻿@inherits _Root
+<div class="cnjr-root" style="border: solid 1px red; padding: 5px;">
+    <ContainerContent Content="ChildContent">
+        <Template>
+            @context.Content
+        </Template>
+    </ContainerContent>
+</div>
+
+@*
+<EditForm Model="@Model" Context="editForm">
+    <DataAnnotationsValidator />
+    <div style="border: solid 1px #">
+        <ValidationSummary />
+    </div>
+    <div style="border: solid 1px #00ffff">
+        <Container Content="ChildContent">
+            <Template>
+                @context.GetContent
+            </Template>
+        </Container>
+    </div>
+</EditForm>    
+*@
