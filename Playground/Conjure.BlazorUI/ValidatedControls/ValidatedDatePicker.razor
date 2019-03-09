@@ -1,0 +1,10 @@
+﻿@typeparam T
+@inherits _ValidatedDatePicker<T>
+<ControlContent Label="@Label" LabelPosition="@LabelPosition">
+    <InputDate Value="@Value" T="T"
+               ValueExpression="@(() => Value)"
+               ValueChanged="@(async v => await ValueChanged.InvokeAsync((T)(object)v))" />
+    <span class="cnjr-validationmessage">
+        <ValidationMessage T="T" For="@(() => Value)" />
+    </span>
+</ControlContent>

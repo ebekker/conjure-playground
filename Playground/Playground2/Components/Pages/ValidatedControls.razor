@@ -1,0 +1,45 @@
+@page "/validated-controls"
+@inherits _ValidatedControls
+
+<h1>Form Controls</h1>
+
+<Root Model="MyModel">
+    <ColumnsLayout>
+        <GroupBox Label="Identity">
+            <RowsLayout>
+                <ValidatedTextBox Label="UN" bind-Value="@MyModel.Username" />
+                <ValidatedTextBox Label="EM" bind-Value="@MyModel.Email" />
+            </RowsLayout>
+        </GroupBox>
+        <GroupBox Label="Common">
+            <RowsLayout>
+                <ValidatedTextBox Label="FN" bind-Value="@MyModel.FirstName" />
+                <ValidatedTextBox Label="LN" bind-Value="@MyModel.LastName" />
+                <ValidatedTextBox Label="LN" bind-Value="@MyModel.DOB" />
+                <ValidatedTextBox Label="RT" bind-Value="@MyModel.Retired" />
+            </RowsLayout>
+        </GroupBox>
+        <GroupBox Label="Animals">
+            <RowsLayout>
+                <ValidatedTextBox Label="DOG" bind-Value="@MyModel.DogCount" />
+                <ValidatedTextBox Label="CAT" bind-Value="@MyModel.CatCount" />
+                <ValidatedTextBox Label="LN" bind-Value="@MyModel.DOB" />
+                <ValidatedTextBox Label="RT" bind-Value="@MyModel.Retired" />
+            </RowsLayout>
+        </GroupBox>
+        <GroupBox Label="Animalish">
+            <RowsLayout>
+                <ValidatedCheckBox Label="FISH" bind-Value="@MyModel.HasFish" />
+                <ValidatedCheckBox Label="EXOT" bind-Value="@MyModel.HasExoticFish" />
+                <ValidatedCheckBox Label="EXOT" bind-Value="@MyModel.HasExoticFish" />
+            </RowsLayout>
+        </GroupBox>
+    </ColumnsLayout>
+</Root>
+
+<hr />
+
+<div>
+    <div>Model:</div>
+    <pre>@ModelAsJson</pre>
+</div>

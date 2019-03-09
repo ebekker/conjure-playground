@@ -1,0 +1,27 @@
+﻿@typeparam T
+@inherits _ValidatedCheckBox<T>
+<ControlContent Label="@Label" LabelPosition="@LabelPosition">
+    @if (typeof(T) == typeof(bool))
+    {
+        <InputCheckbox Value="@ValueAsBool"
+                       ValueExpression="@(() => ValueAsBool)"
+                       ValueChanged="@(async v => await ValueChanged.InvokeAsync((T)(object)v))" />
+    }
+    else if (typeof(T) == typeof(bool?))
+    {
+        <InputSelect Value="@ValueAsString" T="string"
+                     ValueExpression="@(() => ValueAsString)"
+                     ValueChanged="@(async v => await ValueAsStringChanged(v))">
+            <option value="False" selected="@(ValueAsString == "False")">False</option>
+            <option value="True"  selected="@(ValueAsString == "True")">True</option>
+            <option value=""      selected="@(ValueAsString == "")"></option>
+        </InputSelect>
+    }
+    else
+    {
+        <div>UNSUPPORTED TYPE @typeof(T).FullName</div>
+    }
+    <span class="cnjr-validationmessage">
+        <ValidationMessage T="T" For="@(() => Value)" />
+    </span>
+</ControlContent>

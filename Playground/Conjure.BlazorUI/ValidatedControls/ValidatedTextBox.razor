@@ -1,0 +1,39 @@
+﻿@typeparam T
+@inherits _ValidatedTextBox<T>
+<ControlContent Label="@Label" LabelPosition="@LabelPosition">
+    @{ var tt = Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T); }
+    @if (tt == typeof(string))
+    {
+        if (MultiLine)
+        {
+            <InputTextArea Value="@ValueAsString"
+                            ValueExpression="@(() => ValueAsString)"
+                            ValueChanged="@(async v => await OnValueChanged((T)(object)v))" />
+        }
+        else
+        {
+            <InputText Value="@ValueAsString"
+                        ValueExpression="@(() => ValueAsString)"
+                        ValueChanged="@(async v => await OnValueChanged((T)(object)v))" />
+        }
+    }
+    else if (tt == typeof(DateTime))
+    {
+        <InputDate Value="@Value" T="T"
+                    ValueExpression="@(() => Value)"
+                    ValueChanged="@(async v => await OnValueChanged((T)(object)v))" />
+    }
+    else if (tt == typeof(int) || tt == typeof(long) || tt == typeof(float) || tt == typeof(double) || tt == typeof(decimal))
+    {
+        <InputNumber Value="@Value" T="T"
+                    ValueExpression="@(() => Value)"
+                    ValueChanged="@(async v => await OnValueChanged((T)(object)v))" />
+    }
+    else
+    {
+        <div>UNSUPPORTED TYPE @typeof(T).FullName</div>
+    }
+    <span class="cnjr-validationmessage">
+        <ValidationMessage T="T" For="@(() => Value)" />
+    </span>
+</ControlContent>
