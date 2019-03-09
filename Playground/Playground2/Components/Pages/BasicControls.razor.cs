@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Playground2.Components.Pages
 {
-    public class _Index : ComponentBase
+    public class _BasicControls : ComponentBase
     {
         protected LocalModel MyModel { get; set; } = new LocalModel();
 

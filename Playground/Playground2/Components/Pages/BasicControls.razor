@@ -1,7 +1,8 @@
 ﻿@page "/"
-@inherits _Index
+@page "/basic-controls"
+@inherits _BasicControls
 
-<h1>Hello, world!</h1>
+<h1>Basic Controls</h1>
 
 <Root Model="MyModel">
     <ColumnsLayout>
@@ -43,16 +44,16 @@
         </GroupBox>
     </ColumnsLayout>
     <RowsLayout>
-        <TextBlock Label="Username"   LabelPosition="LabelPosition.Top"         >@MyModel.Username</TextBlock>
-        <TextBlock Label="Email"      LabelPosition="LabelPosition.RightAligned">@MyModel.Email</TextBlock>
-        <TextBlock Label="First Name" LabelPosition="LabelPosition.LeftAligned" >@MyModel.FirstName</TextBlock>
-        <TextBlock Label="Last Name"  LabelPosition="LabelPosition.Bottom"      >@MyModel.LastName</TextBlock>
+        <TextBlock Label="Username" LabelPosition="LabelPosition.Top">@MyModel.Username</TextBlock>
+        <TextBlock Label="Email" LabelPosition="LabelPosition.RightAligned">@MyModel.Email</TextBlock>
+        <TextBlock Label="First Name" LabelPosition="LabelPosition.LeftAligned">@MyModel.FirstName</TextBlock>
+        <TextBlock Label="Last Name" LabelPosition="LabelPosition.Bottom">@MyModel.LastName</TextBlock>
     </RowsLayout>
     <RowsLayout>
-        <TextBlock Label="Username"   LabelPosition="LabelPosition.None"        >@MyModel.Username</TextBlock>
-        <TextBlock Label="Email"      LabelPosition="LabelPosition.RightAligned">@MyModel.Email</TextBlock>
-        <TextBlock Label="First Name" LabelPosition="LabelPosition.LeftAligned" >@MyModel.FirstName</TextBlock>
-        <TextBlock Label="Last Name"  LabelPosition="LabelPosition.Collapsed"   >@MyModel.LastName</TextBlock>
+        <TextBlock Label="Username" LabelPosition="LabelPosition.None">@MyModel.Username</TextBlock>
+        <TextBlock Label="Email" LabelPosition="LabelPosition.RightAligned">@MyModel.Email</TextBlock>
+        <TextBlock Label="First Name" LabelPosition="LabelPosition.LeftAligned">@MyModel.FirstName</TextBlock>
+        <TextBlock Label="Last Name" LabelPosition="LabelPosition.Collapsed">@MyModel.LastName</TextBlock>
     </RowsLayout>
 </Root>
 
